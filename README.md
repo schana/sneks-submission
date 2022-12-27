@@ -61,5 +61,5 @@ submission help.
 ### Develop your Snek
 
 In `src/submission/snek/submission.py`, modify the logic of `get_next_direction()`
-to control your Snek's behavior. See https://sneks.dev/docs for documentation of
+to control your Snek's behavior. See https://sneks.dev/docs/index.html for documentation of
 the classes and helper functions available to help refine your Snek.
