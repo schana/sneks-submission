@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sneks-submission"
+version = "1.0.0a0"
+description = "Template repository for submissions to sneks.dev"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Apache Software License"}
+authors = [
+    {name = "Nathaniel Schaaf", email = "nathaniel.schaaf@gmail.com"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "sneks-dev==1.0.0a10"
+]
+
+[project.scripts]
+validate = "scripts:validate"
+run = "scripts:run"
