@@ -23,15 +23,11 @@ submission help.
    `sneks-submission-main`.
    1. You should be located in the same directory as `pyproject.toml`
 3. _(Optional, but recommended)_ Set up a virtual environment
-   1. Install `venv` package
-      ```
-      pip3 install venv
-      ```
-   2. Create virtual environment
+   1. Create virtual environment
       ```
       python3 -m venv venv
       ```
-   3. Activate the environment
+   2. Activate the environment
       1. macOS / Linux
          ```
          source venv/bin/activate
