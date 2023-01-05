@@ -1,8 +1,8 @@
 # Sneks submission template
 
 Build the behavior for your Snek and upload it at [sneks.dev/submit](https://www.sneks.dev/submit) to see how
-it does against other submitters. See the website for details regarding scoring and
-submission help.
+it does against other submitters. See the website for [live results](https://www.sneks.dev) and details regarding
+scoring and submission help.
 
 ## Getting started
 
@@ -13,8 +13,8 @@ submission help.
 2. _(Optional)_ Install an IDE to work in
    1. [PyCharm Community Edition](https://www.jetbrains.com/pycharm/download)
    2. [Visual Studio Code](https://code.visualstudio.com/)
-3. Download `template.zip` to your local machine from [sneks.dev/template/template.zip](https://www.sneks.dev/template/template.zip)
-   and extract its contents.
+3. Download `template.zip` to your local machine
+   from [sneks.dev/template/template.zip](https://www.sneks.dev/template/template.zip) and extract its contents.
 
 ### Set up development environment
 
@@ -54,6 +54,13 @@ submission help.
 
 In `src/submission/snek/submission.py`, modify the logic of `get_next_direction()`
 to control your Snek's behavior. See [sneks.dev/docs](https://www.sneks.dev/docs/index.html) for documentation of
-the classes and helper functions available to help refine your Snek.
+the classes and helper functions available to help refine your Snek. There are also a couple example Sneks
+in `src/examples` that can be used as starting points.
 
-There are also a couple example Sneks in `src/examples` that can be used as starting points.
+#### Configuration
+
+In `src/scripts/config.py`, there are some values that can be changed to tune how the game performs locally. Each step
+in the game has a delay afterwards, defaulting to 40ms. Likewise, after the end of a run, the game pauses for a default
+of one second. These can be changed to your liking, with the added option of requiring a keypress to advance the snake.
+With either `WAIT_FOR_KEYPRESS` option set to `True`, the snake will not move unless a key is pressed. Holding down a
+key will continuously advance the snake.

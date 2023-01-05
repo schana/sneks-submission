@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "sneks-dev==1.0.0a14"
+    "sneks-dev==1.0.0a15"
 ]
 
 [project.scripts]
