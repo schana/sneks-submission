@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sneks-submission"
-version = "1.0.0a0"
+version = "1.0.0"
 description = "Template repository for submissions to sneks.dev"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "sneks-dev==1.0.0a17"
+    "sneks-dev"
 ]
 
 [project.scripts]

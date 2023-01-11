@@ -64,3 +64,12 @@ in the game has a delay afterwards, defaulting to 40ms. Likewise, after the end 
 of one second. These can be changed to your liking, with the added option of requiring a keypress to advance the snake.
 With either `WAIT_FOR_KEYPRESS` option set to `True`, the snake will not move unless a key is pressed. Holding down a
 key will continuously advance the snake.
+
+### Updating the submission template dependencies
+
+If directed by your contest coordinator, you can use the following command to update the submission template
+dependencies to the latest version:
+
+```
+pip install --upgrade --upgrade-strategy eager --editable .
+```
