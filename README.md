@@ -25,7 +25,7 @@ scoring and submission help.
 3. _(Optional, but recommended)_ Set up a virtual environment
    1. Create virtual environment
       ```
-      python3 -m venv venv
+      python -m venv venv
       ```
    2. Activate the environment
       1. macOS / Linux
@@ -36,9 +36,11 @@ scoring and submission help.
          ```
          venv\Scripts\activate
          ```
+         1. If you get an error saying your execution policy prevents the running of the activate script,
+            you can disable that policy temporarily with `Set-ExecutionPolicy Unrestricted -Scope Process`.
 4. Install this package to enable testing locally
    ```
-   pip3 install --editable .
+   pip install --editable .
    ```
 5. Ensure everything works by trying out the helper scripts
    1. Test that the current snake passes validation
