@@ -1,3 +1,5 @@
+"""Example Snek that tries to move up while avoiding obstacles."""
+
 from sneks.engine.core.action import Action
 from sneks.engine.core.direction import Direction
 from sneks.engine.core.snek import Snek
@@ -5,10 +7,9 @@ from sneks.engine.core.snek import Snek
 
 class CustomSnek(Snek):
     """
-    This snek wants to go up, unless it sees something
-    in front of it. It only knows how to avoid obstacles
-    by going right, and will work to go straight up when
-    it doesn't see more obstacles.
+    A Snek that prefers moving up but turns right to avoid obstacles.
+
+    Demonstrates using the look() method to detect obstacles.
     """
 
     def get_next_action(self) -> Action:

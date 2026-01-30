@@ -1,11 +1,14 @@
+"""Example Snek that moves in a circular pattern."""
+
 from sneks.engine.core.action import Action
 from sneks.engine.core.snek import Snek
 
 
 class CustomSnek(Snek):
     """
-    This snek moves in a circle by saving state
-    between turns.
+    A Snek that moves in a circle by cycling through a predefined sequence of actions.
+
+    Demonstrates how to use instance variables to maintain state between turns.
     """
 
     step: int = 0

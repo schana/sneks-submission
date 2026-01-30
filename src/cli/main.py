@@ -1,3 +1,5 @@
+"""CLI for running and validating Sneks locally."""
+
 import pathlib
 
 import typer
@@ -8,19 +10,24 @@ from sneks.games.classic.config import ClassicConfig
 
 from submission import submission
 
-app = typer.Typer(no_args_is_help=True)
+app = typer.Typer(no_args_is_help=True, help="Local development tools for Sneks.")
 PREFIX = str(pathlib.Path(submission.__file__).resolve().parent)
 
 
 @app.command()
 def run(
-    runs: int = 1,
-    sneks_count: int = 1,
-    step_delay: int = 40,
-    step_keypress_wait: bool = False,
-    end_delay: int = 1000,
-    end_keypress_wait: bool = False,
+    runs: int = typer.Option(1, help="Number of game runs to execute."),
+    sneks_count: int = typer.Option(1, help="Number of Sneks to spawn."),
+    step_delay: int = typer.Option(40, help="Delay in ms between steps."),
+    step_keypress_wait: bool = typer.Option(
+        False, help="Wait for keypress between steps."
+    ),
+    end_delay: int = typer.Option(1000, help="Delay in ms after run ends."),
+    end_keypress_wait: bool = typer.Option(
+        False, help="Wait for keypress after run ends."
+    ),
 ) -> None:
+    """Run your Snek locally to test its behavior."""
     ClassicConfig(
         registrar_prefix=PREFIX,
         runs=runs,
@@ -37,6 +44,7 @@ def run(
 
 @app.command()
 def validate() -> None:
+    """Validate your Snek for submission."""
     validator.main(test_path=PREFIX)
 
 
