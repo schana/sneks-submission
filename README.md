@@ -7,7 +7,38 @@ Build the behavior for your Snek and upload it at [sneks.dev/submit](https://www
 against other submitters. See the website for [live results](https://www.sneks.dev) and details regarding scoring and
 submission help.
 
-## Getting started
+## How the Game Works
+
+### The Basics
+
+Sneks is a snake-like game played on a grid of cells. Your Snek moves around the board collecting food to grow longer.
+Each turn, your code decides which action your Snek takes next.
+
+- **Food**: When your Snek's head moves onto a cell containing food, your Snek grows longer
+- **Occupied cells**: If your Snek's head moves onto a cell occupied by another Snek or your own body, your Snek's run
+  ends—it stops taking turns and remains static in its last position
+- **Scoring**: Your score is based on how long you survive and how long your Snek grows. Scores are min-max normalized,
+  meaning the best performer gets 100% and the worst gets 0%, with everyone else scaled in between.
+
+### The Board
+
+The game board is **toroidal** (wraps around). If your Snek moves off the right edge, it appears on the left. Same for
+top/bottom.
+
+### Vision
+
+Your Snek has a limited **vision range**. You can only see occupied cells within a certain distance from your head.
+Food, however, is always visible regardless of distance.
+
+### Relative Coordinates
+
+All positions your Snek receives are **relative to its head**. Your head is always at `Cell(0, 0)`. This means:
+
+- Positive X is to the right of your head
+- Positive Y is above your head
+- Food and occupied cell positions are offsets from where you currently are
+
+## Getting Started
 
 ### Prerequisites
 
@@ -56,20 +87,85 @@ submission help.
        sneks run
        ```
 
-### Develop your Snek
+## Developing Your Snek
 
-In `src/submission/submission.py`, modify the logic of `get_next_action()`
-to control your Snek's behavior. See [sneks.dev/docs](https://www.sneks.dev/docs/index.html) for documentation of the
-classes and helper functions available to help refine your Snek. There are also a couple example Sneks in `src/examples`
+Edit `src/submission/submission.py` to implement your Snek's behavior. The key method is `get_next_action()`:
+
+```python
+from sneks.engine.core.action import Action
+from sneks.engine.core.snek import Snek
+
+
+class CustomSnek(Snek):
+    def get_next_action(self) -> Action:
+        # Your logic here
+        return Action.UP  # Return one of: UP, DOWN, LEFT, RIGHT, MAINTAIN
+```
+
+See [sneks.dev/docs](https://www.sneks.dev/docs/index.html) for full documentation. There are also example Sneks in
+`src/examples`
 that can be used as starting points.
 
-## CLI Reference
+### Available Actions
 
-Run `sneks --help` for full usage information.
+- `Action.UP` - Move up
+- `Action.DOWN` - Move down
+- `Action.LEFT` - Move left
+- `Action.RIGHT` - Move right
+- `Action.MAINTAIN` - Continue in current direction
 
-### `sneks run`
+### Example Strategies
 
-Run your Snek locally to test its behavior.
+Check `src/examples/` for starter ideas:
+
+- `chaotic.py` - Picks a random action each turn
+- `circle.py` - Uses instance variables to track state and move in a pattern
+- `looking_up.py` - Uses `look()` to detect obstacles and avoid them
+
+### Useful Helper Methods
+
+Your Snek class has several built-in methods to help you make decisions:
+
+- `look(direction)` - Returns the distance to the nearest occupied cell in a direction (or the edge of your vision range
+  if no obstacle is visible)
+- `get_occupied()` - Returns all occupied cells your Snek can see
+- `get_food()` - Returns all food cells on the board
+- `get_closest_food()` - Returns the nearest food cell
+- `get_direction_to_destination(cell)` - Returns the best direction to travel toward a cell
+- `get_bearing()` - Returns your Snek's current velocity
+
+Cells also have useful methods:
+
+- `get_distance(other_cell)` - Returns the distance to another cell (accounts for board wrapping)
+- `get_neighbor(direction)` - Returns the adjacent cell in a direction
+- `get_up()`, `get_down()`, `get_left()`, `get_right()` - Returns the adjacent cell in that direction
+
+Directions have a helpful method too:
+
+- `get_action()` - Converts a Direction to the corresponding Action (useful with `get_direction_to_destination()`)
+
+See [sneks.dev/docs](https://www.sneks.dev/docs/index.html) for full documentation.
+
+## Testing Locally
+
+```bash
+# Validate your submission
+sneks validate
+
+# Run a single game
+sneks run
+
+# Run multiple games
+sneks run --runs 10
+
+# Run with multiple Sneks
+sneks run --sneks-count 4
+
+# Step through slowly
+sneks run --step-delay 200
+```
+
+Run `sneks run --help` for full usage information.
 
 | Option                 | Default | Description                      |
 |------------------------|---------|----------------------------------|
@@ -80,9 +176,19 @@ Run your Snek locally to test its behavior.
 | `--end-delay`          | 1000    | Delay in ms after run ends       |
 | `--end-keypress-wait`  | False   | Wait for keypress after run ends |
 
-### `sneks validate`
+## Rules
 
-Validate your Snek for submission.
+- Your submission must pass `sneks validate`
+- Your `submission.py` must contain a `CustomSnek` class
+- No external libraries allowed
+- Submissions that take too long to compute a turn will not pass validation
+
+## Tips for Success
+
+- Read the documentation to learn what methods and helpers are available
+- Test extensively with `sneks run` before submitting
+- Add debug print statements and use `--step-keypress-wait` to step through the game slowly and understand what's
+  happening
 
 ## Updating the submission template dependencies
 
